@@ -11,11 +11,14 @@ class TreeHeight:
         heights = [0] * len(self.parent)
         for vertex in range(self.n):
             if (heights[vertex] != 0):
+                # If the node is visited, then skip it
                 continue
             height = 0
             i = vertex
+            # Calculating the height of vertex
             while i != -1:
                 if (heights[i] != 0):
+                    # If the node has been visited before
                     height += heights[i]
                     break
                 height += 1
