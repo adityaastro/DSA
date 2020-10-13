@@ -18,12 +18,14 @@ class TreeHeight:
             # Calculating the height of vertex
             while i != -1:
                 if (heights[i] != 0):
-                    # If the node has been visited before
+                    # If the parent node has been visited before. ∴ Simply add its value
                     height += heights[i]
                     break
+                # Traverse through the nodes respective parents and keep incrementing height by 1
                 height += 1
                 i = self.parent[i]
-            maxHeight = max(maxHeight, height)
+            maxHeight = max(maxHeight, height)  # Update the maximum height
+            # Update the height for all the parent nodes of the current node
             i = vertex
             while i != -1:
                 if (heights[i] != 0):
