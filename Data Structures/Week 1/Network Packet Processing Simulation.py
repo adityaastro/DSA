@@ -1,6 +1,6 @@
 import sys
 from collections import deque
-# file = open('19.txt','r')
+
 Q = deque()
 S, N = map(int, sys.stdin.readline().split())
 if N == 0:
