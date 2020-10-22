@@ -8,8 +8,14 @@ class DisjSet:
         self.max = max(self.rank)
 
     def find(self, element):
+        update = []
         while self.parents[element] != -1:
+            update.append(element)
             element = self.parents[element]
+
+        for i in update:
+            self.parents[i] = element
+            
         return element
 
     def union(self, i, j):
