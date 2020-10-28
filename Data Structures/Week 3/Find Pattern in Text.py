@@ -4,14 +4,6 @@ def hash(S, p, x):
         h = (h * x + ord(i)) % p
     return h
 
-# def hash(S, p, x):
-#     temp=0
-#     a=1
-#     for i in S:
-#         temp=(temp+(ord(i)*a))%p
-#         a*=x
-#     return temp
-
 
 def PH(S, P, p, x):
     lP, lS = len(P), len(S)

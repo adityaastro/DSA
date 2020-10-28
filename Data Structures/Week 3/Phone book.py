@@ -1,7 +1,6 @@
 import sys
 from random import randint as r
 
-
 class HashTable:
     def __init__(self):
         self.m = 1000000
@@ -13,18 +12,6 @@ class HashTable:
 
     def hash(self, data):
         return int(((self.a * data + self.b) % self.p) % self.m)
-
-    # def rehash(self):
-    #     lf = (self.n / self.m)
-    #     if lf < 0.9:
-    #         return
-    #     self.m *= 2
-    #     arrnew = [None] * self.m
-    #     for i in range(self.m // 2):
-    #         k = self.arr[i]
-    #         if k:
-    #             key = hash(k)
-    #             arrnew[key] = k
 
     def remove(self, key):
         h = self.hash(key)
@@ -44,8 +31,6 @@ class HashTable:
         return 'not found'
 
     def __setitem__(self, key, data):
-        # self.rehash()
-        # self.n += 1
         h = self.hash(key)
         if self.arr[h]:
             for i in range(len(self.arr[h])):
