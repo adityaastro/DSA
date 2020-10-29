@@ -61,4 +61,3 @@ for _ in range(n):
         H.remove(q[1])
 
 print(*Ans, sep='\n')
-print(sys.getsizeof(H.arr))

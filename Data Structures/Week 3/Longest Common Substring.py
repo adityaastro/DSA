@@ -5,9 +5,8 @@ sys.setrecursionlimit(10**8)
 
 
 def PH(S, p, x):
-    lS = len(S)
-    H1 = [0] * (lS[0] + 1)
-    H2 = [0] * (lS[1] + 1)
+    H1 = [0] * (len(S[0]) + 1)
+    H2 = [0] * (len(S[1]) + 1)
     l = max(len(S[0]), len(S[1]))
     for i in range(l):
         if i < len(S[0]):
@@ -17,26 +16,32 @@ def PH(S, p, x):
     return H1, H2
 
 
-def compare(S, x, p, lb=0, ub=(min(len(S[0]), len(S[1])))):
+def compare(S, x, p, lb, ub):
     global H1, H2
-    flag = True
     l = (lb + ub) // 2
+    if lb > ub:
+        l1, l2 = len(S[0]), len(S[1])
+        y = pow(x, l, p)
+        h1 = {(H1[i + l] - y * H1[i]) % p: i for i in range(l1 - l + 1)}
+        for i in range(l2 - l + 1):
+            h2 = (H2[i + l] - y * H2[i]) % p
+            if h2 in h1 and S[0][h1[h2]:h1[h2] + l - 1] == S[1][i:i + l - 1]:
+                return h1[h2], i, l
+
     l1, l2 = len(S[0]), len(S[1])
-    L = max(l1, l2)
     y = pow(x, l, p)
-    h1 = {(H1[i + l] - y * H1[i]) % p: i for i in range(l1 - l)}
-    for i in range(l2 - l):
+    h1 = {(H1[i + l] - y * H1[i]) % p: i for i in range(l1 - l + 1)}
+    for i in range(l2 - l + 1):
         h2 = (H2[i + l] - y * H2[i]) % p
-        if h2 in h1:
-            flag = False
-            return compare(S, x, p, l, ub)
-            break
-    if flag:
-        compare(S, x, p, lb, l)
+        if h2 in h1 and S[0][h1[h2]:h1[h2] + l - 1] == S[1][i:i + l - 1]:
+            return compare(S, x, p, l + 1, ub)
+    return compare(S, x, p, lb, l - 1)
+
 
 p = 1000000007
 x = r(1, p - 1)
-H1, H2 = PH(S, p, x)
-q = tuple(map(str, input().split()))
-Ans = [compare(i, x, p) for i in q]
-print(*Ans, sep='\n')
+while True:
+    q = tuple(map(str, input().split()))
+    H1, H2 = PH(q, p, x)
+    Ans = compare(q, x, p, 0, min(len(q[0]), len(q[1])))
+    print(*Ans)
