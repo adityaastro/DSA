@@ -16,17 +16,11 @@ def PH(S, p, x):
     return H1, H2
 
 
-def compare(S, x, p, lb, ub):
+def compare(S, x, p, lb, ub, pos1=None,pos2=None):
     global H1, H2
     l = (lb + ub) // 2
     if lb > ub:
-        l1, l2 = len(S[0]), len(S[1])
-        y = pow(x, l, p)
-        h1 = {(H1[i + l] - y * H1[i]) % p: i for i in range(l1 - l + 1)}
-        for i in range(l2 - l + 1):
-            h2 = (H2[i + l] - y * H2[i]) % p
-            if h2 in h1 and S[0][h1[h2]:h1[h2] + l - 1] == S[1][i:i + l - 1]:
-                return h1[h2], i, l
+        return pos1, pos2, l
 
     l1, l2 = len(S[0]), len(S[1])
     y = pow(x, l, p)
@@ -34,11 +28,11 @@ def compare(S, x, p, lb, ub):
     for i in range(l2 - l + 1):
         h2 = (H2[i + l] - y * H2[i]) % p
         if h2 in h1 and S[0][h1[h2]:h1[h2] + l - 1] == S[1][i:i + l - 1]:
-            return compare(S, x, p, l + 1, ub)
-    return compare(S, x, p, lb, l - 1)
+            return compare(S, x, p, l + 1, ub, h1[h2], i)
+    return compare(S, x, p, lb, l - 1, pos1, pos2)
 
 
-p = 1000000007
+p = 1000003
 x = r(1, p - 1)
 while True:
     q = tuple(map(str, input().split()))
