@@ -15,7 +15,6 @@ def r(i):
 
 
 def SiftDown(i, heap):
-    global Swaps
     index = i
     L = l(i)
     R = r(i)
@@ -27,6 +26,7 @@ def SiftDown(i, heap):
         heap[i], heap[index] = heap[index], heap[i]
         Swaps.append((i, index))
         SiftDown(index, heap)
+
 
 
 N = int(sys.stdin.readline())
