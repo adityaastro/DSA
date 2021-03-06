@@ -22,12 +22,12 @@ for i in range(N - 1):
         rem -= 1
         Q.append(currpacket)
     else:
-        while len(Q) > 0 and currpacket[0] >= Q[0][1]:
+        while Q and currpacket[0] >= Q[0][1]:
             ans = Q.popleft()
             Ans[ans[2]] = ans[0]
             rem += 1
         if rem > 0:
-            if len(Q) > 0:
+            if Q:
                 currpacket[0] = Q[-1][1]
             currpacket[1] += currpacket[0]
             Q.append(currpacket)

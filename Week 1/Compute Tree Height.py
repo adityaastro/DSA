@@ -18,7 +18,7 @@ class TreeHeight:
             # Calculating the height of vertex
             while i != -1:
                 if (heights[i] != 0):
-                    # If the parent node has been visited before. ∴ Simply add its value
+                    # The parent node has been visited before. ∴ Simply add its value
                     height += heights[i]
                     break
                 # Traverse through the nodes respective parents and keep incrementing height by 1

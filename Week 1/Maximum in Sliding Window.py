@@ -6,7 +6,7 @@ m = int(input())
 q = deque()
 q.append(0)
 for i in range(m):
-    while q and l[i] >= l[q[-1]] :
+    while q and l[i] >= l[q[-1]]:
         q.pop()
     q.append(i)
 
